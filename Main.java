@@ -1,9 +1,27 @@
-/**
- * Created by Алексей on 04.10.2015.
- */
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Hello AAA project! :(");
+
+        Scanner sc = new Scanner(System.in);
+        User user = new User();
+
+        System.out.println("Введите login, password:");
+        System.out.print("login: ");
+        if (sc.hasNextLine()) {
+            user.setLogin(sc.nextLine());
+
+            System.out.print("password: ");
+            if (sc.hasNextLine()) {
+                user.setPassword(sc.nextLine());
+            } else {
+                System.out.println("-");
+            }
+
+        } else {
+            System.out.println("-");
+        }
+
     }
 }
