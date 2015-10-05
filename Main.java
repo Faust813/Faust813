@@ -10,12 +10,30 @@ public class Main {
 
         System.out.println("¬ведите login, password:");
 
-        System.out.print("login: ");
-        user.setLogin(sc.nextLine());
+        System.out.print("login: "); // ввод login
+        String login = sc.nextLine();
 
-        System.out.print("password: ");
-        user.setPassword(sc.nextLine());
+        System.out.print("password: "); // ввод password
+        String password = sc.nextLine();
 
+        user.setData(login, password);
         System.out.println(testBD.checkUser(user));
+
+        System.out.print("resource: "); // A B C
+        String resource = sc.nextLine();
+
+        System.out.print("permission: "); // указание роли
+        int permission=-1;
+        if (sc.hasNextInt()) {
+            permission = sc.nextInt();
+        } else {
+            System.out.println("роль не введена");
+        }
+
+        testBD.checkPermissionsResource(resource,permission);
+
+
+
+
     }
 }
