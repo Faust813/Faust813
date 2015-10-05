@@ -4,24 +4,18 @@ public class Main {
 
     public static void main(String[] args) {
 
+        TestBD testBD = new TestBD();
         Scanner sc = new Scanner(System.in);
         User user = new User();
 
         System.out.println("¬ведите login, password:");
+
         System.out.print("login: ");
-        if (sc.hasNextLine()) {
-            user.setLogin(sc.nextLine());
+        user.setLogin(sc.nextLine());
 
-            System.out.print("password: ");
-            if (sc.hasNextLine()) {
-                user.setPassword(sc.nextLine());
-            } else {
-                System.out.println("-");
-            }
+        System.out.print("password: ");
+        user.setPassword(sc.nextLine());
 
-        } else {
-            System.out.println("-");
-        }
-
+        System.out.println(testBD.checkUser(user));
     }
 }
