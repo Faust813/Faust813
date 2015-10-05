@@ -30,10 +30,6 @@ public class Main {
             System.out.println("роль не введена");
         }
 
-        testBD.checkPermissionsResource(resource,permission);
-
-
-
-
+        System.out.println(testBD.checkPermissionsResource(user,resource,permission));
     }
 }

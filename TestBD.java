@@ -6,20 +6,19 @@ public class TestBD { // база пользователей
 
     private User[] listUsers = new User[10];
     private String[] salt = new String[10];
-    private int[] permissions = new int[10];
-    //private int[] permRes = new int[3];
-    private static String resource = "A.B.C"; // A>=1, B>=3, C=7
-    private static String permRes = "1.3.7";
+    private Role[] roles = new Role[10];
+    private static String resource = "A.B.C";
+
 
     {
 
         listUsers[0] = new User("Alexeyyy322", "5bbad9d2832819b4571d6c173afff8be");
         salt[0] = "0d45e2ac0d121d45e09d0bd9a6f0f555"; // password: no1234
-        permissions[0] = 4;
+        roles[0] = new Role(4, "B");
 
         listUsers[1] = new User("DDmitry", "f9247f6ccc1af05f3b6c241aea78c8d0");
         salt[1] = "c927fadaf32cc04a3923af1ca77a66ab"; // password: yes1234
-        permissions[1] = 2;
+        roles[1] = new Role(2, "B");
     }
 
     public TestBD() {
@@ -39,28 +38,16 @@ public class TestBD { // база пользователей
         return 1;
     }
 
-    public int checkPermissionsResource(User user,String resource, int permission) { // проверка прав пользователя
-        if (checkUser(user)!=0) return checkUser(user);
+    public int checkPermissionsResource(User user, String resource, int permission) { // проверка прав пользователя
+        if (checkUser(user) != 0) return checkUser(user);
         if ((permission < 0) && (permission > 7)) return 3;
+        if (permission != roles[foundLogin(user.getLogin())].getPer()) return 4;
 
-        String[] res = TestBD.resource.split("\\.");
-        String[] per = TestBD.permRes.split("\\.");
-        int[] role = new int[per.length];
+        int a = TestBD.resource.indexOf(roles[foundLogin(user.getLogin())].getRes());
+        int b = TestBD.resource.indexOf(resource);
 
-        for (int i = 0; i < per.length; i++) {
-            role[i] = new Integer(per[i]);
-        }
-
-        for (int i = 0; i < res.length; i++) {
-            if (res[i].equals(resource)) {
-
-                if(role[i] == permission){}
-
-            }
-        }
-
-
-        return 0000000000000;
+        if(b<a)return 4;
+        return 0;
     }
 
     public static String md5Custom(String st) { // ленивое хеширование md5
@@ -86,10 +73,40 @@ public class TestBD { // база пользователей
         return md5Hex;
     }
 
-    private int foundLogin(String login){
-        for(int i=0;listUsers[i] != null; i++){
-            if(login.equals(listUsers[i].getLogin())) return i;
+    private int foundLogin(String login) {
+        for (int i = 0; listUsers[i] != null; i++) {
+            if (login.equals(listUsers[i].getLogin())) return i;
         }
         return -1;
     }
+}
+
+class Role {
+
+    private int per;
+    private String res;
+
+    public Role() {
+        this.per = 0;
+        this.res = "";
+    }
+
+    public Role(int per, String res) {
+        this.per = per;
+        this.res = res;
+    }
+
+    public void setRole(int per, String res) {
+        this.per = per;
+        this.res = res;
+    }
+
+    public int getPer() {
+        return this.per;
+    }
+
+    public String getRes() {
+        return this.res;
+    }
+
 }
