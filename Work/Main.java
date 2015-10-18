@@ -1,6 +1,7 @@
 package Work;
 
-import java.util.Scanner;
+
+        import java.util.Scanner;
 
 public class Main {
 
@@ -11,7 +12,7 @@ public class Main {
         User user = new User();
         int temp;
 
-        System.out.println("Введите login, password:");
+        System.out.println("¬ведите login, password:");
 
         System.out.print("login: "); // ввод login
         String login = sc.nextLine();
@@ -36,7 +37,21 @@ public class Main {
 
             if(temp == 0) {
 
+                System.out.print("Start Date: "); // Дата начала
+                String date1 = sc.nextLine();
+
+                System.out.print("End Date: "); // Дата окончания
+                String date2 = sc.nextLine();
+
+                System.out.print("Volume: "); // Дата окончания
+                String vol = sc.nextLine();
+
+                temp = testBD.CheckDate(user, resource, permission,date1,date2,vol);
+                System.out.println(temp);
+
             }
         }
     }
+
+
 }
