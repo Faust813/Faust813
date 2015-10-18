@@ -1,17 +1,23 @@
+package Work;
+
 public class User {
 
     private String login;
 
     private String password;
+    
+    private String salt;
 
     public User() {
         this.login = "";
         this.password = "";
+        this.salt = "";
     }
 
-    public User(String login, String password) {
+    public User(String login, String password, String salt) {
         this.login = login;
         this.password = password;
+        this.salt = salt;
     }
 
     public void setData(String login, String password) {
@@ -26,4 +32,6 @@ public class User {
     public String getPassword() {
         return this.password;
     }
+
+    public String getSalt(){return this.salt;}
 }
