@@ -6,7 +6,9 @@ import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class TestBD { // база пользователей
 
@@ -93,61 +95,27 @@ public class TestBD { // база пользователей
     public int CheckDate(User user, String resource, String permission, String dateOne, String dateTwo, String vol) {
         if (checkPermissionsResource(user, resource, permission) != 0)
             return checkPermissionsResource(user, resource, permission);
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
 
-        if (dateOne.length() !=10) return 5;
+            try {
+                Calendar calendar = new GregorianCalendar();
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+                formatter.setLenient(false);
+                calendar.setTime(formatter.parse(dateOne));
 
-        int temp1=0;
-        for (int i = 0; i < dateOne.length(); i++) {
+                formatter.setLenient(false);
+                calendar.setTime(formatter.parse(dateTwo));
 
-
-            if (Character.isDigit(dateOne.charAt(i)) == false  && i!= 4 && i!= 7) {
+                for (int i = 0; i <vol.length(); i++) {
+                    if (Character.isDigit(vol.charAt(i)) == false) {
+                        return 5;
+                    }
+                }
+                 return 0;
+            }
+            catch (Exception e) {
                 return 5;
-
-
-            } else if (dateOne.charAt(4) != '-' && dateOne.charAt(7) != '-') {
-
-                return 5;
-
             }
 
-        }
-
-
-        if (dateTwo.length() != 10) return 5;
-
-        for (int i = 0; i < dateTwo.length(); i++) {
-
-
-            if (Character.isDigit(dateTwo.charAt(i)) == false && i!= 4 && i!= 7) {
-                return 5;
-
-
-            } else if (dateTwo.charAt(4) != '-' && dateTwo.charAt(7) != '-') {
-
-                return 5;
-
-            }
-
-        }
-
-
-        try {
-            Date date1 = formatter.parse(dateOne);
-            Date date2 = formatter.parse(dateTwo);
-
-        } catch (ParseException e) {
-
-        }
-
-        for (int i = 0; i <vol.length(); i++) {
-
-            if (Character.isDigit(vol.charAt(i)) == false) {
-                return 5;
-            }
-        }
-
-        return 0;
     }
 
 }
