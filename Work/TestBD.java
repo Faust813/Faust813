@@ -31,6 +31,7 @@ public class TestBD { // база пользователей
     }
 
     public int checkUser(User user) { // проверка пользователя на присутствие в бд
+        if(user.getLogin()==null) return 1;
         for (int i = 0; i < listUsers.size(); i++) {
             if (user.getLogin().equals(listUsers.get(i).getLogin())) {
 
@@ -62,7 +63,33 @@ public class TestBD { // база пользователей
         return 4;
     }
 
-    public static String md5Custom(String st) { // ленивое хеширование md5
+    public int checkDate(User user, String resource, String permission, String dateOne, String dateTwo, String vol) {
+        if (checkPermissionsResource(user, resource, permission) != 0)
+            return checkPermissionsResource(user, resource, permission);
+
+        try {
+            Calendar calendar = new GregorianCalendar();
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+            formatter.setLenient(false);
+            calendar.setTime(formatter.parse(dateOne));
+
+            formatter.setLenient(false);
+            calendar.setTime(formatter.parse(dateTwo));
+
+            for (int i = 0; i <vol.length(); i++) {
+                if (Character.isDigit(vol.charAt(i)) == false) {
+                    return 5;
+                }
+            }
+            return 0;
+        }
+        catch (Exception e) {
+            return 5;
+        }
+
+    }
+
+    private static String md5Custom(String st) { // ленивое хеширование md5
         MessageDigest messageDigest = null;
         byte[] digest = new byte[0];
 
@@ -91,31 +118,4 @@ public class TestBD { // база пользователей
         }
         return -1;
     }
-
-    public int CheckDate(User user, String resource, String permission, String dateOne, String dateTwo, String vol) {
-        if (checkPermissionsResource(user, resource, permission) != 0)
-            return checkPermissionsResource(user, resource, permission);
-
-            try {
-                Calendar calendar = new GregorianCalendar();
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
-                formatter.setLenient(false);
-                calendar.setTime(formatter.parse(dateOne));
-
-                formatter.setLenient(false);
-                calendar.setTime(formatter.parse(dateTwo));
-
-                for (int i = 0; i <vol.length(); i++) {
-                    if (Character.isDigit(vol.charAt(i)) == false) {
-                        return 5;
-                    }
-                }
-                 return 0;
-            }
-            catch (Exception e) {
-                return 5;
-            }
-
-    }
-
 }
