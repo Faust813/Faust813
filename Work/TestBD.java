@@ -1,13 +1,11 @@
-package Work;
+package work;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class TestBD { // база пользователей
@@ -18,13 +16,21 @@ public class TestBD { // база пользователей
     {
         // password: no1234
         listUsers.add(new User("Alexeyyy322","5bbad9d2832819b4571d6c173afff8be","0d45e2ac0d121d45e09d0bd9a6f0f555"));
-
         // password: yes1234
         listUsers.add(new User("DDmitry","f9247f6ccc1af05f3b6c241aea78c8d0","c927fadaf32cc04a3923af1ca77a66ab"));
+        // password: sup3rpaZZ
+        listUsers.add(new User("jdoe","a0c21452fe66b190a9f3f359a2bae9b0","102dcbaa91943bdbdf17590a1109a28d"));
+        // password: Qweqrty12
+        listUsers.add(new User("jrow","031a58015fc33b69888fce8cbe642709","e36c3d02fc5a7c02560a6003034ec7d1"));
 
-        listRoles.add(new Permissions(listUsers.get(0).getLogin(),"A.B",Role.READ));
-        listRoles.add(new Permissions(listUsers.get(0).getLogin(),"A.B.C",Role.WRITE));
-        listRoles.add(new Permissions(listUsers.get(1).getLogin(),"A.D",Role.READ));
+        listRoles.add(new Permissions(listUsers.get(0).getLogin(),"A.B.",Role.READ));
+        listRoles.add(new Permissions(listUsers.get(0).getLogin(),"A.B.C.",Role.WRITE));
+        listRoles.add(new Permissions(listUsers.get(1).getLogin(),"A.D.",Role.READ));
+
+        listRoles.add(new Permissions(listUsers.get(2).getLogin(),"a.",Role.READ));
+        listRoles.add(new Permissions(listUsers.get(2).getLogin(),"a.b.",Role.WRITE));
+        listRoles.add(new Permissions(listUsers.get(2).getLogin(),"a.bc.",Role.EXECUTE));
+        listRoles.add(new Permissions(listUsers.get(3).getLogin(),"a.b.c.",Role.EXECUTE));
     }
 
     public TestBD() {
@@ -55,7 +61,7 @@ public class TestBD { // база пользователей
 
         for(int i = 0;i<listRoles.size();i++) {
             if (listRoles.get(i).getLoginUser().equals(user.getLogin()))
-                if(resource.startsWith(listRoles.get(i).getResource()))
+                if(resource.concat(".").startsWith(listRoles.get(i).getResource()))//StupidGenius
                     if(permission.equals(listRoles.get(i).getRoles().toString()))
                         return 0;
 

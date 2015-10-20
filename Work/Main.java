@@ -1,4 +1,4 @@
-package Work;
+package work;
 
 import org.apache.commons.cli.*;
 import java.io.PrintWriter;
@@ -18,6 +18,7 @@ public class Main {
         String vol = "";
         int arguments = 0;
 
+
         Options options = new Options()
             .addOption("h",false,"print this help message")
             .addOption("login",true,"login")
@@ -26,7 +27,7 @@ public class Main {
             .addOption("role",true,"permission")
             .addOption("ds",true,"date start")
             .addOption("de",true,"date end")
-            .addOption("val",true,"value");
+            .addOption("vol",true,"value");
 
         CommandLineParser parser = new DefaultParser();
         try{
@@ -38,7 +39,7 @@ public class Main {
             if(cmd.hasOption("role"))   {permission = cmd.getOptionValue("role");   arguments = 2;}
             if(cmd.hasOption("ds"))     {date1 = cmd.getOptionValue("ds");          arguments = 3;}
             if(cmd.hasOption("de"))     {date2 = cmd.getOptionValue("de");          arguments = 3;}
-            if(cmd.hasOption("val"))    {vol = cmd.getOptionValue("val");           arguments = 3;}
+            if(cmd.hasOption("vol"))    {vol = cmd.getOptionValue("vol");           arguments = 3;}
 
             user.setData(login, password);
             if(arguments == 3)
