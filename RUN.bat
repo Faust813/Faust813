@@ -1,2 +1,1 @@
-java -classpath "commons-cli-1.3.1.jar;GlobalProject.jar" work.Main %*
-pause
+java -jar "target\aaa-1.0-SNAPSHOT.jar" %*
