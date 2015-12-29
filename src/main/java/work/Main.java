@@ -1,16 +1,10 @@
 package work;
 
-import db.connection.ConnectionBD;
 import org.apache.commons.cli.*;
 
 import java.io.PrintWriter;
 
 public class Main {
-
-    private final ConnectionBD connectBD = new ConnectionBD();
-    private final AuthenticationService authenticationService = new AuthenticationService();
-    private final AuthorizationService authorizationService = new AuthorizationService(connectBD, authenticationService);
-    private final AccountingService accountingService = new AccountingService(connectBD);
 
     public static void main(String[] args) {
         ReturnCode returnCode = work(args);

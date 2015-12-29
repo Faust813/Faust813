@@ -11,7 +11,7 @@ import java.util.GregorianCalendar;
 * Азм есим база данных
 * */
 public class TestBD { // база пользователей
-
+    
     ArrayList<User> listUsers = new ArrayList<User>();
     ArrayList<Permissions> listRoles = new ArrayList<Permissions>();
 
@@ -38,7 +38,7 @@ public class TestBD { // база пользователей
     public TestBD() {
     }
 
-    public ReturnCode checkUser(User user) { // проверка пользователя на присутствие в бд
+    public ReturnCode checkUser(User user) { // �������� ������������ �� ����������� � ��
         if (user.getLogin() == null) return ReturnCode.UNKNOWNUSER;
         for (int i = 0; i < listUsers.size(); i++) {
             if (user.getLogin().equals(listUsers.get(i).getLogin())) {
@@ -53,7 +53,7 @@ public class TestBD { // база пользователей
         return ReturnCode.UNKNOWNUSER;
     }
 
-    public ReturnCode checkPermissionsResource(User user, String resource, String permission) { // проверка прав пользователя
+    public ReturnCode checkPermissionsResource(User user, String resource, String permission) { // �������� ���� ������������
         if (checkUser(user) != ReturnCode.NORMAL) return checkUser(user);
         try {
             Role.valueOf(permission);
@@ -96,7 +96,7 @@ public class TestBD { // база пользователей
 
     }
 
-    private static String md5Custom(String st) { // ленивое хеширование md5
+    private static String md5Custom(String st) { // ������� ����������� md5
         MessageDigest messageDigest = null;
         byte[] digest = new byte[0];
 
