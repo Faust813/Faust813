@@ -2,20 +2,24 @@ package work;
 
 public class Permissions {
 
-    private String loginUser;
+    private final Long id;
+    private final User user;
+    private final Role roles;
+    private final String resource;
 
-    private String resource;
-
-    private Role roles;
-
-    public Permissions(String loginUser, String resource, Role roles){
-        this.loginUser =loginUser;
+    public Permissions(Long id, User user, Role roles, String resource){
+        this.id = id;
+        this.user = user;
         this.resource = resource;
         this.roles = roles;
     }
 
-    public String getLoginUser() {
-        return loginUser;
+    public Long getId() {
+        return this.id;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public String getResource() {

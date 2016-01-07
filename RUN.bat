@@ -1,1 +1,1 @@
-java -jar "target\aaa-1.0-SNAPSHOT.jar" %*
+java -jar "target\aaa-2.0.jar" %*

@@ -9,11 +9,11 @@ public enum ReturnCode {
     ACCESSDENIED(4),
     INCORRECTACTIVITY(5);
 
+	private final int value;
+
     public int getExitCode() {
         return value;
     }
-
-    private final int value;
 
     ReturnCode(int value) {
         this.value = value;

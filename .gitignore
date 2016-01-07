@@ -1,3 +1,5 @@
 *.iml
+.git/
 .idea/
 target/
+stdout/
